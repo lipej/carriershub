@@ -6,10 +6,17 @@ defmodule Carrierhub.Carriers.Loader do
 
       if canHandler(Code.ensure_loaded(plugin_name)),
         do: {:ok, plugin_name},
-        else: {:error, "#{plugin_name} this plugin was not implemented."}
+        else: raise NotImplementedError,
+          message: "#{name} plugin was not implemeted"
+
   end
 
   defp canHandler({:module, module}), do: true
   defp canHandler({:error, message}), do: false
   
+end
+
+
+defmodule NotImplementedError do
+  defexception [:message, code: :bad_request]
 end

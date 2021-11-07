@@ -1,14 +1,29 @@
 defmodule CarrierhubWeb.Router do
   use CarrierhubWeb, :router
+  use Plug.ErrorHandler
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Plug.Parsers,
+      parsers: [:json],
+      json_decoder: Jason
   end
+
+
 
   scope "/api", CarrierhubWeb do
     pipe_through :api
 
     get "/health", HealthController, :index
+
+    post "/action", AppController, :action
+
+  end
+
+  def handle_errors(conn, %{kind: _kind, reason: %{code: code, message: message}, stack: _stack}) do
+    conn
+    |> put_status(code)
+    |> json( %{success: false, message: message})
   end
 
   # Enables LiveDashboard only for development
