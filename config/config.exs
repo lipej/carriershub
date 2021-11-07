@@ -13,7 +13,6 @@ config :carrierhub,
 # Configures the endpoint
 config :carrierhub, CarrierhubWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: CarrierhubWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Carrierhub.PubSub,
   live_view: [signing_salt: "sd/LMMbD"]
 

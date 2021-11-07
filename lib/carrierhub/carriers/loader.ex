@@ -23,5 +23,5 @@ defmodule Carrierhub.Carriers.Loader do
 end
 
 defmodule NotImplementedError do
-  defexception [:message, code: :bad_request]
+  defexception [:message, plug_status: :bad_request]
 end

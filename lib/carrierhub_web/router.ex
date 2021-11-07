@@ -20,7 +20,7 @@ defmodule CarrierhubWeb.Router do
 
 
   defmodule NoRouteError do
-    defexception code: 404, message: "no route found", conn: nil, router: nil
+    defexception plug_status: 404, message: "no route found", conn: nil, router: nil
   
     def exception(opts) do
       conn   = Keyword.fetch!(opts, :conn)
@@ -32,9 +32,9 @@ defmodule CarrierhubWeb.Router do
     end
   end
 
-  def handle_errors(conn, %{kind: _kind, reason: %{code: code, message: message}, stack: _stack}) do
+  def handle_errors(conn, %{kind: _kind, reason: %{message: message}, stack: _stack}) do
     conn
-    |> put_status(code)
+    |> put_status(conn.status)
     |> json( %{success: false, message: message})
   end
   
@@ -44,7 +44,7 @@ defmodule CarrierhubWeb.Router do
     |> json( %{success: false, message: message})
   end
 
-  def handle_errors(conn, %{kind: _kind, reason: reason, stack: stack}) do
+  def handle_errors(conn, %{kind: _kind, reason: _reason, stack: stack}) do
     conn
     |> put_status(conn.status)
     |> json( %{success: false, message: "Something went wrong", data: inspect stack})
