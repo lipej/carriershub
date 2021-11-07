@@ -39,8 +39,8 @@ defmodule Carrierhub.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:mongodb, ">= 0.0.0"},
-      {:poolboy, ">= 0.0.0"},
+      {:ecto_sql, "~> 3.7.1"},
+      {:postgrex, ">= 0.0.0"},
       {:poison, "~> 5.0"},
       {:httpoison, "~> 1.8"}
     ]

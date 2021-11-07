@@ -8,8 +8,7 @@ defmodule Carrierhub.Application do
       CarrierhubWeb.Telemetry,
       {Phoenix.PubSub, name: Carrierhub.PubSub},
       CarrierhubWeb.Endpoint,
-      {Mongo, [name: :mongo, url: "mongodb://localhost:27017/carrierhub_local", pool_size: 10]}
-
+      Carrierhub.Repo
     ]
 
     opts = [strategy: :one_for_one, name: Carrierhub.Supervisor]
