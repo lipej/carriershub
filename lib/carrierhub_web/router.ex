@@ -38,7 +38,7 @@ defmodule CarrierhubWeb.Router do
     |> json( %{success: false, message: message})
   end
   
-  def handle_errors(conn, %{kind: _kind, reason:  %Phoenix.Router.NoRouteError{message: message}, stack: stack}) do
+  def handle_errors(conn, %{kind: _kind, reason:  %Phoenix.Router.NoRouteError{message: message}, stack: _stack}) do
     conn
     |> put_status(conn.status)
     |> json( %{success: false, message: message})

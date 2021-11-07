@@ -1,7 +1,6 @@
 defmodule CarrierhubWeb.AppController do
   use CarrierhubWeb, :controller
   alias Carrierhub.Carriers.Loader
-  alias Carrierhub.Carriers.Manager
 
 
   def action(conn, _params) do

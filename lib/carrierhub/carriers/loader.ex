@@ -17,8 +17,8 @@ defmodule Carrierhub.Carriers.Loader do
         message: "Can't perform action: #{action}"
   end
 
-  defp canHandler({:module, module}), do: true
-  defp canHandler({:error, message}), do: false
+  defp canHandler({:module, _module}), do: true
+  defp canHandler({:error, _message}), do: false
   
 end
 
