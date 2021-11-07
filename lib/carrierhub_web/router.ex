@@ -26,6 +26,14 @@ defmodule CarrierhubWeb.Router do
     |> json( %{success: false, message: message})
   end
 
+  def handle_errors(conn, %{kind: _kind, reason: _reason, stack: stack}) do
+    IO.inspect(stack)
+    conn
+    |> put_status(conn.status)
+    |> json( %{success: false, message: "Something went wrong", data: inspect stack})
+  end
+
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
