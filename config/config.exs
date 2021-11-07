@@ -7,6 +7,15 @@
 # General application configuration
 import Config
 
+config :carrierhub, Carrierhub.Repo,
+  database: "carrierhub_repo",
+  username: "postgres",
+  password: "pass",
+  hostname: "localhost"
+
+  config :carrierhub,
+  ecto_repos: [Carrierhub.Repo]
+
 config :carrierhub,
   generators: [binary_id: false]
 
