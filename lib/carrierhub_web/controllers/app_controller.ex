@@ -1,17 +1,19 @@
 defmodule CarrierhubWeb.AppController do
   use CarrierhubWeb, :controller
   alias Carrierhub.Carriers.Loader
+  alias Carrierhub.Carriers.Manager
+
 
   def action(conn, _params) do
-      plugin = Loader.pluginLoader(conn.body_params["carrier"])
-
-      handle_response(plugin, conn)
-
+    conn.body_params["carrier"]
+    |>Loader.pluginLoader
+    |>Loader.canPerformAction(conn.body_params["action"])
+    |>handle_response(conn)
   end
 
   defp handle_response({:ok, return_action}, conn) do
     conn
-    |>json(%{message: "#{return_action}"})
+    |>json(%{message: inspect return_action})
   end
   
 
