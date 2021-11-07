@@ -40,7 +40,9 @@ defmodule Carrierhub.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:mongodb, ">= 0.0.0"},
-      {:poolboy, ">= 0.0.0"}
+      {:poolboy, ">= 0.0.0"},
+      {:poison, "~> 5.0"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 
