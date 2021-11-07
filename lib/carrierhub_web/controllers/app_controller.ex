@@ -16,6 +16,4 @@ defmodule CarrierhubWeb.AppController do
     |>json(%{message: inspect return_action})
   end
   
-
-
 end

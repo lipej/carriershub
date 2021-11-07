@@ -27,7 +27,6 @@ defmodule CarrierhubWeb.Router do
   end
 
   def handle_errors(conn, %{kind: _kind, reason: _reason, stack: stack}) do
-    IO.inspect(stack)
     conn
     |> put_status(conn.status)
     |> json( %{success: false, message: "Something went wrong", data: inspect stack})
