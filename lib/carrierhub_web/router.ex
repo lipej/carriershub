@@ -9,8 +9,6 @@ defmodule CarrierhubWeb.Router do
       json_decoder: Jason
   end
 
-
-
   scope "/api", CarrierhubWeb do
     pipe_through :api
 
@@ -20,26 +18,38 @@ defmodule CarrierhubWeb.Router do
 
   end
 
+
+  defmodule NoRouteError do
+    defexception code: 404, message: "no route found", conn: nil, router: nil
+  
+    def exception(opts) do
+      conn   = Keyword.fetch!(opts, :conn)
+      router = Keyword.fetch!(opts, :router)
+      path   = "/" <> Enum.join(conn.path_info, "/")
+  
+      %NoRouteError{message: "no route found for #{conn.method} #{path} (#{inspect router})",
+      conn: conn, router: router}
+    end
+  end
+
   def handle_errors(conn, %{kind: _kind, reason: %{code: code, message: message}, stack: _stack}) do
     conn
     |> put_status(code)
     |> json( %{success: false, message: message})
   end
+  
+  def handle_errors(conn, %{kind: _kind, reason:  %Phoenix.Router.NoRouteError{message: message}, stack: stack}) do
+    conn
+    |> put_status(conn.status)
+    |> json( %{success: false, message: message})
+  end
 
-  def handle_errors(conn, %{kind: _kind, reason: _reason, stack: stack}) do
+  def handle_errors(conn, %{kind: _kind, reason: reason, stack: stack}) do
     conn
     |> put_status(conn.status)
     |> json( %{success: false, message: "Something went wrong", data: inspect stack})
   end
 
-
-  # Enables LiveDashboard only for development
-  #
-  # If you want to use the LiveDashboard in production, you should put
-  # it behind authentication and allow only admins to access it.
-  # If your application does not have an admins-only section yet,
-  # you can use Plug.BasicAuth to set up some basic authentication
-  # as long as you are also using SSL (which you should anyway).
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
 
