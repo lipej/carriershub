@@ -7,7 +7,7 @@ defmodule Carrierhub.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: Mix.compilers(),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -38,6 +38,7 @@ defmodule Carrierhub.MixProject do
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
+      {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.5"},
       {:ecto_sql, "~> 3.7.1"},
       {:postgrex, ">= 0.0.0"},
