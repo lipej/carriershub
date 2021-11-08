@@ -60,7 +60,8 @@ defmodule CarrierhubWeb do
     quote do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
-
+      import CarrierhubWeb.ErrorHelpers
+      import CarrierhubWeb.Gettext
       alias CarrierhubWeb.Router.Helpers, as: Routes
     end
   end

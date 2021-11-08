@@ -6,22 +6,16 @@ defmodule Carrierhub.Carriers.Loader do
 
       if canHandler(Code.ensure_loaded(plugin_name)),
         do: {:ok, plugin_name},
-        else: raise NotImplementedError,
-          message: "#{name} plugin was not implemeted"
+        else: {:error, %{result: "#{name} plugin was not implemeted", status: :bad_request} }
   end
 
-  def canPerformAction({:ok, plugin}, action) do
+  def canPerformAction(plugin, action) do
     if Keyword.has_key?(plugin.__info__(:functions), String.to_atom(action) ),
-      do: {:ok, {plugin, String.to_atom(action)}},
-      else: raise NotImplementedError,
-        message: "Can't perform action: #{action}"
+      do: {:ok, {String.to_atom(action)}},
+      else: {:error, %{result: "Can't perform action: #{action}", status: :bad_request} } 
   end
 
   defp canHandler({:module, _module}), do: true
   defp canHandler({:error, _message}), do: false
   
-end
-
-defmodule NotImplementedError do
-  defexception [:message, plug_status: :bad_request]
 end
