@@ -3,6 +3,7 @@ defmodule CarrierhubWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+
     plug Plug.Parsers,
       parsers: [:json],
       json_decoder: Jason
@@ -15,6 +16,7 @@ defmodule CarrierhubWeb.Router do
 
     post "/action", AppController, :action
 
+    resources "/clients", ClientsController, only: [:show, :create, :update, :delete]
   end
 
   if Mix.env() in [:dev, :test] do
