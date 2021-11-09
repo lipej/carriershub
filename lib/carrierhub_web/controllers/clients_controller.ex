@@ -15,6 +15,7 @@ defmodule CarrierhubWeb.ClientsController do
   def create(conn, params) do
     with {:ok, client} <- Carrierhub.create_client(params) do
       conn
+      |> put_status(:created)
       |> render("index.json", client: client)
     end
   end
