@@ -8,12 +8,12 @@
 import Config
 
 config :carrierhub, Carrierhub.Repo,
-  database: "carrierhub_repo",
+  database: "carrierhub",
   username: "postgres",
   password: "pass",
   hostname: "localhost"
 
-  config :carrierhub,
+config :carrierhub,
   ecto_repos: [Carrierhub.Repo]
 
 config :carrierhub,
