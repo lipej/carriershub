@@ -20,7 +20,7 @@ defmodule CarrierhubWeb.Router do
 
     resources "/integrations", IntegrationsController, only: [:show, :update, :delete]
 
-    post "/clients/:clients_id/integrations", IntegrationsController, :create
+    post "/clients/:client_id/integrations", IntegrationsController, :create
   end
 
   if Mix.env() in [:dev, :test] do

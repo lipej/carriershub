@@ -1,13 +1,13 @@
-defmodule Carrierhub.Integrations.Update do
-  alias Carrierhub.{Repo, Integrations}
+defmodule Carrierhub.Integration.Update do
+  alias Carrierhub.{Repo, Integration}
 
   def call(params) do
-    case Repo.get(Integrations, params["id"]) do
+    case Repo.get(Integration, params["id"]) do
       nil ->
         {:error, %{result: "integration not found", status: :not_found}}
 
       integration ->
-        case Integrations.changeset(integration, params) |> Repo.update() do
+        case Integration.changeset(integration, params) |> Repo.update() do
           {:ok, integration} ->
             {:ok, integration}
 

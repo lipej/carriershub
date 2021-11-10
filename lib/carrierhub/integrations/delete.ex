@@ -1,8 +1,8 @@
-defmodule Carrierhub.Integrations.Delete do
-  alias Carrierhub.{Repo, Integrations}
+defmodule Carrierhub.Integration.Delete do
+  alias Carrierhub.{Repo, Integration}
 
   def call(uuid) do
-    case Repo.get(Integrations, uuid) do
+    case Repo.get(Integration, uuid) do
       nil ->
         {:error, %{result: "integration not found", status: :not_found}}
 

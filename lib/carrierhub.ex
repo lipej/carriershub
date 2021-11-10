@@ -1,18 +1,18 @@
 defmodule Carrierhub do
-  alias Carrierhub.Clients.Create, as: ClientCreate
-  alias Carrierhub.Clients.Get, as: ClientGet
-  alias Carrierhub.Clients.Update, as: ClientUpdate
-  alias Carrierhub.Clients.Delete, as: ClientDelete
+  alias Carrierhub.Client.Create, as: ClientCreate
+  alias Carrierhub.Client.Get, as: ClientGet
+  alias Carrierhub.Client.Update, as: ClientUpdate
+  alias Carrierhub.Client.Delete, as: ClientDelete
 
   defdelegate create_client(params), to: ClientCreate, as: :call
   defdelegate get_client(params), to: ClientGet, as: :call
   defdelegate update_client(params), to: ClientUpdate, as: :call
   defdelegate delete_client(params), to: ClientDelete, as: :call
 
-  alias Carrierhub.Integrations.Create, as: IntegrationCreate
-  alias Carrierhub.Integrations.Get, as: IntegrationGet
-  alias Carrierhub.Integrations.Update, as: IntegrationUpdate
-  alias Carrierhub.Integrations.Delete, as: IntegrationDelete
+  alias Carrierhub.Integration.Create, as: IntegrationCreate
+  alias Carrierhub.Integration.Get, as: IntegrationGet
+  alias Carrierhub.Integration.Update, as: IntegrationUpdate
+  alias Carrierhub.Integration.Delete, as: IntegrationDelete
 
   defdelegate create_integration(params), to: IntegrationCreate, as: :call
   defdelegate get_integration(params), to: IntegrationGet, as: :call

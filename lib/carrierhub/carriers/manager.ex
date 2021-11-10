@@ -1,5 +1,5 @@
 defmodule Carrierhub.Carriers.Manager do
-  alias Carrierhub.{Repo, Clients}
+  alias Carrierhub.{Repo, Client}
 
   def do_action(plugin, action, fields, data) do
     apply(plugin, action, [data, fields])
@@ -20,7 +20,7 @@ defmodule Carrierhub.Carriers.Manager do
   end
 
   defp find_client(uuid) do
-    with client <- Repo.get(Clients, uuid) do
+    with client <- Repo.get(Client, uuid) do
       case Repo.preload(client, :integrations) do
         nil -> {:error, %{result: "client not found with UUID #{uuid}", status: :bad_request}}
         client -> client
