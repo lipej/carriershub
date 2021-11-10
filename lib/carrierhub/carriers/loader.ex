@@ -2,7 +2,8 @@ defmodule Carrierhub.Carriers.Loader do
   alias Carrierhub.Carriers.Plugins
 
   def plugin_loader(name) do
-    plugin_name = Module.concat(Plugins, String.capitalize(name))
+    name = String.capitalize(String.downcase(name))
+    plugin_name = Module.concat(Plugins, name)
 
     if canHandler(Code.ensure_loaded(plugin_name)),
       do: {:ok, plugin_name},

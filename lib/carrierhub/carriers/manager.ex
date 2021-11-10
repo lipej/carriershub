@@ -6,13 +6,15 @@ defmodule Carrierhub.Carriers.Manager do
   end
 
   def can_perform_action(plugin, action) do
+    action = String.downcase(action)
+
     if Keyword.has_key?(plugin.__info__(:functions), String.to_atom(action)),
       do: {:ok, String.to_atom(action)},
       else: {:error, %{result: "Can't perform action: #{action}", status: :bad_request}}
   end
 
   def check_integrations(uuid, carrier) do
-    with {:ok, client} <- find_client(uuid) do
+    with client <- find_client(uuid) do
       extract_fields({:ok, client}, carrier)
     end
   end
@@ -27,6 +29,8 @@ defmodule Carrierhub.Carriers.Manager do
   end
 
   defp extract_fields({:ok, client}, carrier) do
+    carrier = String.capitalize(String.downcase(carrier))
+
     case client do
       client ->
         case Enum.filter(client.integrations, fn
