@@ -14,7 +14,7 @@ defmodule CarrierhubWeb.Router do
 
     get "/health", HealthController, :index
 
-    post "/action", AppController, :action
+    post "/action", ActionController, :action
 
     resources "/clients", ClientsController, only: [:show, :create, :update, :delete]
 
