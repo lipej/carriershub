@@ -1,6 +1,6 @@
-defmodule Carrierhub.Clients do
+defmodule Carrierhub.Client do
   use Ecto.Schema
-  alias Carrierhub.{Integrations}
+  alias Carrierhub.{Integration}
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -11,7 +11,7 @@ defmodule Carrierhub.Clients do
     field(:name, :string)
     field(:key, :string)
     field(:cnpj, :string)
-    has_many(:integrations, Integrations)
+    has_many(:integrations, Integration)
     timestamps()
   end
 

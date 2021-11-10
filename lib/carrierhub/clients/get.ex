@@ -1,8 +1,8 @@
-defmodule Carrierhub.Clients.Get do
-  alias Carrierhub.{Repo, Clients}
+defmodule Carrierhub.Client.Get do
+  alias Carrierhub.{Repo, Client}
 
   def call(uuid) do
-    case Repo.get(Clients, uuid) do
+    case Repo.get(Client, uuid) do
       nil -> {:error, %{result: "client not found", status: :not_found}}
       client -> {:ok, Repo.preload(client, :integrations)}
     end

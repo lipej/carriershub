@@ -13,8 +13,6 @@ defmodule CarrierhubWeb.IntegrationsController do
   end
 
   def create(conn, params) do
-    IO.inspect(params)
-
     with {:ok, integration} <- Carrierhub.create_integration(params) do
       conn
       |> put_status(:created)
@@ -24,8 +22,6 @@ defmodule CarrierhubWeb.IntegrationsController do
 
   def update(conn, params) do
     with {:ok, integration} <- Carrierhub.update_integration(params) do
-      IO.inspect(integration)
-
       conn
       |> render("index.json", integration: integration)
     end

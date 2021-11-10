@@ -22,8 +22,6 @@ defmodule CarrierhubWeb.ClientsController do
 
   def update(conn, params) do
     with {:ok, client} <- Carrierhub.update_client(params) do
-      IO.inspect(client)
-
       conn
       |> render("index.json", client: client)
     end

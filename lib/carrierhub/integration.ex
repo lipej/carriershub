@@ -1,17 +1,17 @@
-defmodule Carrierhub.Integrations do
+defmodule Carrierhub.Integration do
   use Ecto.Schema
-  alias Carrierhub.{Clients}
+  alias Carrierhub.{Client}
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  @fields [:name, :fields, :clients_id]
+  @fields [:name, :fields, :client_id]
   @derive {Jason.Encoder, only: [:name, :fields, :id]}
 
   schema "integrations" do
     field(:name, :string)
     field(:fields, :map)
-    belongs_to(:clients, Clients)
+    belongs_to(:client, Client)
     timestamps()
   end
 
