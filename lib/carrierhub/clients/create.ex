@@ -1,10 +1,10 @@
-defmodule Carrierhub.Client.Create do
-  alias Carrierhub.{Repo, Client}
+defmodule Carriershub.Client.Create do
+  import Carriershub.Client
 
   def call(params) do
-    case Client.changeset(%Client{}, params) |> Repo.insert() do
-      {:error, result} -> {:error, %{result: result, status: :not_found}}
-      {:ok, client} -> {:ok, Repo.preload(client, :integrations)}
+    case create(params) do
+      {:ok, client} -> {:ok, preload(client)}
+      {_, result} -> {:error, %{result: result, status: :not_found}}
     end
   end
 end
