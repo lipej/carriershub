@@ -1,4 +1,4 @@
-defmodule Carrierhub.Carriers.Plugins.Faker do
+defmodule Carriershub.Carriers.Plugins.Faker do
   def tracking(data, fields) do
     IO.inspect(data)
     IO.inspect(fields)

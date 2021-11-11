@@ -1,19 +1,17 @@
-defmodule Carrierhub.Integration.Update do
-  alias Carrierhub.{Repo, Integration}
+defmodule Carriershub.Integration.Update do
+  import Carriershub.Integration
 
   def call(params) do
-    case Repo.get(Integration, params["id"]) do
-      nil ->
-        {:error, %{result: "integration not found", status: :not_found}}
+    if integration = get(params["id"]) do
+      case update(integration, params) do
+        {:ok, integration} ->
+          {:ok, integration}
 
-      integration ->
-        case Integration.changeset(integration, params) |> Repo.update() do
-          {:ok, integration} ->
-            {:ok, integration}
-
-          {:error, error} ->
-            {:error, %{result: error, status: :not_found}}
-        end
+        {:error, error} ->
+          {:error, %{result: error, status: :not_found}}
+      end
+    else
+      {:error, %{result: "integration not found", status: :not_found}}
     end
   end
 end

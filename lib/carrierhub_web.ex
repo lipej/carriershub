@@ -1,12 +1,12 @@
-defmodule CarrierhubWeb do
+defmodule CarriershubWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use CarrierhubWeb, :controller
-      use CarrierhubWeb, :view
+      use CarriershubWeb, :controller
+      use CarriershubWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,18 +19,18 @@ defmodule CarrierhubWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: CarrierhubWeb
+      use Phoenix.Controller, namespace: CarriershubWeb
 
       import Plug.Conn
-      alias CarrierhubWeb.Router.Helpers, as: Routes
+      alias CarriershubWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/carrierhub_web/templates",
-        namespace: CarrierhubWeb
+        root: "lib/Carriershub_web/templates",
+        namespace: CarriershubWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -60,9 +60,9 @@ defmodule CarrierhubWeb do
     quote do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
-      import CarrierhubWeb.ErrorHelpers
-      import CarrierhubWeb.Gettext
-      alias CarrierhubWeb.Router.Helpers, as: Routes
+      import CarriershubWeb.ErrorHelpers
+      import CarriershubWeb.Gettext
+      alias CarriershubWeb.Router.Helpers, as: Routes
     end
   end
 

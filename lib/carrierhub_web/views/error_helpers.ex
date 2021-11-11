@@ -1,4 +1,4 @@
-defmodule CarrierhubWeb.ErrorHelpers do
+defmodule CarriershubWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -26,9 +26,9 @@ defmodule CarrierhubWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(CarrierhubWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(CarriershubWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(CarrierhubWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(CarriershubWeb.Gettext, "errors", msg, opts)
     end
   end
 end

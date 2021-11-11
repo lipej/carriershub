@@ -1,8 +1,8 @@
-defmodule CarrierhubWeb.HealthController do
-  use CarrierhubWeb, :controller
+defmodule CarriershubWeb.HealthController do
+  use CarriershubWeb, :controller
 
   def index(conn, _params) do
     conn
-    |>json(%{message: "Running..."})
+    |> json(%{message: "Running..."})
   end
 end

@@ -1,6 +1,6 @@
-defmodule Carrierhub.Client do
+defmodule Carriershub.Client do
   use Ecto.Schema
-  alias Carrierhub.{Integration}
+  alias Carriershub.{Integration, Repo, Client}
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -21,5 +21,34 @@ defmodule Carrierhub.Client do
     |> validate_required(@fields)
     |> validate_length(:cnpj, is: 14)
     |> unique_constraint(:cnpj)
+  end
+
+  def preload(client) do
+    Repo.preload(client, :integrations)
+  end
+
+  def find_by_key(key) do
+    Repo.get_by(Client, key: key)
+  end
+
+  def create(params) do
+    %Client{}
+    |> changeset(params)
+    |> Repo.insert()
+  end
+
+  def get(id) do
+    Client
+    |> Repo.get(id)
+  end
+
+  def delete(client) do
+    Repo.delete(client)
+  end
+
+  def update(client, params) do
+    client
+    |> changeset(params)
+    |> Repo.update()
   end
 end

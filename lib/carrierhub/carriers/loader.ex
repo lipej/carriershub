@@ -1,15 +1,15 @@
-defmodule Carrierhub.Carriers.Loader do
-  alias Carrierhub.Carriers.Plugins
+defmodule Carriershub.Carriers.Loader do
+  alias Carriershub.Carriers.Plugins
 
-  def plugin_loader(name) do
-    name = String.capitalize(String.downcase(name))
-    plugin_name = Module.concat(Plugins, name)
+  def can_loader(integration) do
+    integration = String.capitalize(String.downcase(integration))
 
-    if canHandler(Code.ensure_loaded(plugin_name)),
-      do: {:ok, plugin_name},
-      else: {:error, %{result: "#{name} plugin was not implemeted", status: :bad_request}}
+    case Code.ensure_loaded(Module.concat(Plugins, integration)) do
+      {:module, module} ->
+        {:ok, module}
+
+      _ ->
+        {:error, %{result: "#{integration} plugin was not implemeted", status: :bad_request}}
+    end
   end
-
-  defp canHandler({:module, _module}), do: true
-  defp canHandler({:error, _message}), do: false
 end

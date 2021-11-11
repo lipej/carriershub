@@ -1,13 +1,13 @@
-defmodule Carriershub.Carriers.Plugins.Transp do
+defmodule Carriershub.Carriers.Plugins.Test do
   def tracking(data, fields) do
     IO.inspect(data)
     IO.inspect(fields)
-    IO.inspect("performing tracking action from Transp")
+    IO.inspect("performing trackings action from Test")
   end
 
   def solicitation(data, fields) do
     IO.inspect(data)
     IO.inspect(fields)
-    IO.inspect("performing solicitation action from Transp")
+    IO.inspect("performing solicitation action from Test")
   end
 end
