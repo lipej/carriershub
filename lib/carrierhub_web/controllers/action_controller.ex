@@ -1,18 +1,19 @@
-defmodule CarrierhubWeb.ActionController do
-  use CarrierhubWeb, :controller
+defmodule CarriershubWeb.ActionController do
+  use CarriershubWeb, :controller
 
-  import Carrierhub.Carriers.{Loader, Manager}
+  import Carriershub.Carriers.{Loader, Manager}
 
-  alias CarrierhubWeb.FallbackController
+  alias CarriershubWeb.FallbackController
 
   action_fallback FallbackController
 
-  def action(conn, _params) do
-    with {:ok, fields} <-
-           check_integrations(conn.body_params["uuid"], conn.body_params["carrier"]),
-         {:ok, plugin} <- plugin_loader(conn.body_params["carrier"]),
-         {:ok, action} <- can_perform_action(plugin, conn.body_params["action"]),
-         txt <- do_action(plugin, action, fields, conn.body_params["data"]) do
+  def index(conn, %{"integration" => integration, "action" => action, "data" => data}) do
+    uuid = conn.assigns[:client]
+
+    with {:ok, fields} <- get_fields(uuid, integration),
+         {:ok, plugin} <- can_loader(integration),
+         {:ok, action} <- can_perform_action(plugin, action),
+         txt <- do_action(plugin, action, fields, data) do
       conn
       |> render("action.json", response: txt)
     end
