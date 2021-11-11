@@ -1,5 +1,5 @@
 defmodule CarriershubWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :Carriershub
+  use Phoenix.Endpoint, otp_app: :carriershub
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
