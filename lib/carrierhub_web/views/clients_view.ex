@@ -1,5 +1,5 @@
-defmodule CarrierhubWeb.ClientsView do
-  use CarrierhubWeb, :view
+defmodule CarriershubWeb.ClientsView do
+  use CarriershubWeb, :view
 
   def render("index.json", %{client: client}) do
     %{

@@ -7,22 +7,22 @@
 # General application configuration
 import Config
 
-config :carrierhub, Carrierhub.Repo,
-  database: "carrierhub",
+config :carriershub, Carriershub.Repo,
+  database: "carriershub",
   username: "postgres",
   password: "pass",
   hostname: "localhost"
 
-config :carrierhub,
-  ecto_repos: [Carrierhub.Repo]
+config :carriershub,
+  ecto_repos: [Carriershub.Repo]
 
-config :carrierhub,
+config :carriershub,
   generators: [binary_id: false]
 
 # Configures the endpoint
-config :carrierhub, CarrierhubWeb.Endpoint,
+config :carriershub, CarriershubWeb.Endpoint,
   url: [host: "localhost"],
-  pubsub_server: Carrierhub.PubSub,
+  pubsub_server: Carriershub.PubSub,
   live_view: [signing_salt: "sd/LMMbD"]
 
 # Configures Elixir's Logger
