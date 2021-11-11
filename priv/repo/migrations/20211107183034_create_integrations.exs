@@ -6,7 +6,7 @@ defmodule Carriershub.Repo.Migrations.CreateIntegrations do
       add :id, :uuid, primary_key: true
       add :name, :string
       add :fields, :json
-      add :client_id, references(:clients, type: :binary_id)
+      add :client_id, references(:clients, [type: :binary_id, on_delete: :delete_all])
       timestamps()
     end
 
