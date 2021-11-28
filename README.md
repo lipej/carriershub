@@ -1,5 +1,9 @@
 # Carriershub
 
+### COVERAGE
+
+[![Coverage Status](https://coveralls.io/repos/github/lipejose/carriershub-elixir/badge.svg?branch=main)](https://coveralls.io/github/lipejose/carriershub-elixir?branch=main)
+
 To start your Phoenix server:
 
 - Install dependencies with `mix deps.get`
