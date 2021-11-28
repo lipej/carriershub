@@ -1,21 +1,52 @@
-on: push
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [21.3.8.10, 22.1.7]
-        elixir: [1.8.2, 1.9.4]
+    runs-on: ubuntu-16.04
     env:
       MIX_ENV: test
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - pair:
+              elixir: 1.7.4
+              otp: 21.3.8.17
+          - pair:
+              elixir: 1.11.3
+              otp: 23.2.5
+            lint: lint
+            coverage: coverage
     steps:
-      - uses: actions/checkout@v1.0.0
-      - uses: erlef/setup-beam@v1
+      - uses: actions/checkout@v2
+
+      - uses: erlef/setup-elixir@v1
         with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
-      - run: mix deps.get
+          otp-version: ${{matrix.pair.otp}}
+          elixir-version: ${{matrix.pair.elixir}}
+
+      - name: Install Dependencies
+        run: mix deps.get --only test
+
+      - run: mix format --check-formatted
+        if: ${{ matrix.lint }}
+
+      - run: mix deps.get && mix deps.unlock --check-unused
+        if: ${{ matrix.lint }}
+
+      - run: mix deps.compile
+
+      - run: mix compile --warnings-as-errors
+        if: ${{ matrix.lint }}
+
+      - run: mix test
+
       - run: mix coveralls.github
+        if: ${{matrix.coverage}}
