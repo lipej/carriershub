@@ -54,4 +54,30 @@ defmodule CarriershubWeb.ClientsControllerTest do
 
     assert json_response(conn, 401)
   end
+
+  test "it should update client name" do
+    post(build_conn(), "/api/clients", name: "test", key: "testkey", cnpj: "00000000000001")
+    token = json_response(post(build_conn(), "/api/auth", key: "testkey"), 200)["token"]
+
+    conn =
+      patch(build_conn() |> put_req_header("authorization", "Bearer " <> token), "/api/clients",
+        name: "new client name"
+      )
+
+    assert data = json_response(conn, 200)["data"]
+
+    assert %{
+             "name" => "new client name"
+           } = data
+  end
+
+  test "it should delete it self" do
+    post(build_conn(), "/api/clients", name: "test", key: "testkey", cnpj: "00000000000001")
+    token = json_response(post(build_conn(), "/api/auth", key: "testkey"), 200)["token"]
+
+    conn =
+      delete(build_conn() |> put_req_header("authorization", "Bearer " <> token), "/api/clients")
+
+    assert json_response(conn, 200)
+  end
 end
