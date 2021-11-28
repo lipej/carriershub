@@ -13,7 +13,9 @@ defmodule CarriershubWeb.IntegrationsController do
   end
 
   def create(conn, params) do
-    with {:ok, integration} <- Carriershub.create_integration(params) do
+    new_integration = Map.put(params, "client_id", conn.assigns[:client])
+
+    with {:ok, integration} <- Carriershub.create_integration(new_integration) do
       conn
       |> put_status(:created)
       |> render("index.json", integration: integration)

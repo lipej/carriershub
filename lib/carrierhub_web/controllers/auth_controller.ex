@@ -8,7 +8,7 @@ defmodule CarriershubWeb.AuthController do
   action_fallback FallbackController
 
   def index(conn, %{"key" => key}) do
-    with client <- find_by_key(key),
+    with {:ok, client} <- find_by_key(key),
          token <-
            Phoenix.Token.sign(CarriershubWeb.Endpoint, "suuuuuuper_secret", %{
              id: client.id,
@@ -17,6 +17,11 @@ defmodule CarriershubWeb.AuthController do
       conn
       |> put_status(200)
       |> json(%{token: token})
+    else
+      {:error, message} ->
+        conn
+        |> put_status(404)
+        |> json(%{error: message})
     end
   end
 end

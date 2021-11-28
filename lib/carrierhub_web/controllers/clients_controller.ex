@@ -5,8 +5,8 @@ defmodule CarriershubWeb.ClientsController do
 
   action_fallback FallbackController
 
-  def show(conn, params) do
-    with {:ok, client} <- Carriershub.get_client(params["id"]) do
+  def show(conn, _params) do
+    with {:ok, client} <- Carriershub.get_client(conn.assigns[:client]) do
       conn
       |> render("index.json", client: client)
     end
@@ -21,14 +21,16 @@ defmodule CarriershubWeb.ClientsController do
   end
 
   def update(conn, params) do
-    with {:ok, client} <- Carriershub.update_client(params) do
+    client_to_persist = Map.put(params, "id", conn.assigns[:client])
+
+    with {:ok, client} <- Carriershub.update_client(client_to_persist) do
       conn
       |> render("index.json", client: client)
     end
   end
 
-  def delete(conn, params) do
-    with {:ok, client} <- Carriershub.delete_client(params["id"]) do
+  def delete(conn, _params) do
+    with {:ok, client} <- Carriershub.delete_client(conn.assigns[:client]) do
       conn
       |> render("index.json", client: client)
     end
