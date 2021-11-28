@@ -23,6 +23,9 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+    env:
+      MIX_ENV: test
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
 
@@ -37,4 +40,3 @@ jobs:
       - run: mix test
 
       - run: mix coveralls.github
-        if: ${{matrix.coverage}}
