@@ -4,30 +4,54 @@ defmodule CarriershubWeb.ClientsControllerTest do
   alias Carriershub.Repo
 
   setup do
-    # Explicitly get a connection before each test
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
   test "it should create a client" do
     conn =
-      post(build_conn(), "/api/clients", name: "test one", key: "testkey", cnpj: "00000000000006")
+      post(build_conn(), "/api/clients", name: "test", key: "testkey", cnpj: "00000000000001")
 
     assert data = json_response(conn, 201)["data"]
 
     assert %{
-             "name" => "test one",
+             "name" => "test",
              "key" => "testkey",
-             "cnpj" => "00000000000006",
+             "cnpj" => "00000000000001",
              "integrations" => []
            } = data
   end
 
   test "it should get errot when create two clients with same cnpj" do
-    post(build_conn(), "/api/clients", name: "test two", key: "testkey2", cnpj: "00000000000013")
+    post(build_conn(), "/api/clients", name: "test", key: "testkey", cnpj: "00000000000001")
 
     conn =
-      post(build_conn(), "/api/clients", name: "test two", key: "testkey2", cnpj: "00000000000013")
+      post(build_conn(), "/api/clients", name: "test", key: "testkey", cnpj: "00000000000001")
 
     assert json_response(conn, 404)
+  end
+
+  test "it should get client by token" do
+    post(build_conn(), "/api/clients", name: "test", key: "testkey", cnpj: "00000000000001")
+
+    token = json_response(post(build_conn(), "/api/auth", key: "testkey"), 200)["token"]
+
+    conn =
+      get(build_conn() |> put_req_header("authorization", "Bearer " <> token), "/api/clients")
+
+    assert data = json_response(conn, 200)["data"]
+
+    assert %{
+             "name" => "test",
+             "key" => "testkey",
+             "cnpj" => "00000000000001",
+             "integrations" => []
+           } = data
+  end
+
+  test "it should get 401 with invalid token" do
+    conn =
+      get(build_conn() |> put_req_header("authorization", "Bearer invalid_token"), "/api/clients")
+
+    assert json_response(conn, 401)
   end
 end
