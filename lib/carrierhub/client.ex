@@ -28,7 +28,10 @@ defmodule Carriershub.Client do
   end
 
   def find_by_key(key) do
-    Repo.get_by(Client, key: key)
+    case Repo.get_by(Client, key: key) do
+      nil -> {:error, "Client not found"}
+      client -> {:ok, client}
+    end
   end
 
   def create(params) do
