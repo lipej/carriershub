@@ -17,20 +17,18 @@ defmodule CarriershubWeb.Router do
     pipe_through :api
 
     get "/health", HealthController, :index
-
     post "/auth", AuthController, :index
-
-    resources "/clients", ClientsController, only: [:show, :create, :update, :delete]
-
-    resources "/integrations", IntegrationsController, only: [:show, :update, :delete]
-
-    post "/clients/:client_id/integrations", IntegrationsController, :create
+    resources "/clients", ClientsController, only: [:create]
   end
 
   scope "/api", CarriershubWeb do
     pipe_through [:api, :auth]
 
     post "/action", ActionController, :index
+    get "/clients", ClientsController, :show
+    delete "/clients", ClientsController, :delete
+    patch "/clients", ClientsController, :update
+    resources "/integrations", IntegrationsController, only: [:show, :create, :update, :delete]
   end
 
   if Mix.env() in [:dev, :test] do
