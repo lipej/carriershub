@@ -1,2 +1,2 @@
-Ecto.Adapters.SQL.Sandbox.mode(Carriershub.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(Carriershub.Repo, :auto)
 ExUnit.start()
