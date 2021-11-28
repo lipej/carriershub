@@ -7,6 +7,10 @@ config :carriershub, CarriershubWeb.Endpoint,
   secret_key_base: "OgDmbStIM7hxSSSa1uA9QpIfPxbkeMwhtqbOhH4/xi9gZjejwSndnSOegf42K4dj",
   server: false
 
+config :carriershub, Carriershub.Repo,
+  pool: Ecto.Adapters.SQL.Sandbox,
+  database: "carriershub_for_test"
+
 # Print only warnings and errors during test
 config :logger, level: :warn
 

@@ -10,7 +10,10 @@ defmodule Carriershub.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: [
+        "test.cov": :test
+      ]
     ]
   end
 
@@ -55,7 +58,13 @@ defmodule Carriershub.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get"]
+      setup: ["deps.get"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      "test.cov": [
+        "test --cover --export-coverage default",
+        "test.coverage"
+      ]
     ]
   end
 end
