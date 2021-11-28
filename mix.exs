@@ -11,8 +11,14 @@ defmodule Carriershub.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
+      test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
-        "test.cov": :test
+        "test.cov": :test,
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.github": :test
       ]
     ]
   end
@@ -46,7 +52,8 @@ defmodule Carriershub.MixProject do
       {:ecto_sql, "~> 3.7.1"},
       {:postgrex, ">= 0.0.0"},
       {:poison, "~> 5.0"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
