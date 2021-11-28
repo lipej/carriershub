@@ -1,5 +1,10 @@
 {
-  "skip_files": ["test"],
+  "skip_files": [
+    "test",
+    "lib/carrierhub/application.ex",
+    "lib/carrierhub_web/telemetry.ex",
+    "lib/carrierhub_web.ex"
+  ],
   "coverage_options": {
     "minimum_coverage": 90
   }

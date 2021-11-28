@@ -6,9 +6,6 @@ defmodule Carriershub.Client.Delete do
       case delete(client) do
         {:ok, client} ->
           {:ok, preload(client)}
-
-        {_, error} ->
-          {:error, %{result: error, status: :not_found}}
       end
     else
       {:error, %{result: "client not found", status: :not_found}}

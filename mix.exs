@@ -18,7 +18,7 @@ defmodule Carriershub.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test,
-        "coveralls.github": :test
+        "coveralls.github ": :test
       ]
     ]
   end

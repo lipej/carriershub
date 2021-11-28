@@ -7,6 +7,11 @@ defmodule CarriershubWeb.ClientsControllerTest do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
   end
 
+  @hack_token Phoenix.Token.sign(CarriershubWeb.Endpoint, "suuuuuuper_secret", %{
+                id: "bf945ca6-b8d6-41d5-a656-e42826db7bd2",
+                name: "test"
+              })
+
   test "it should create a client" do
     conn =
       post(build_conn(), "/api/clients", name: "test", key: "testkey", cnpj: "00000000000001")
@@ -79,5 +84,35 @@ defmodule CarriershubWeb.ClientsControllerTest do
       delete(build_conn() |> put_req_header("authorization", "Bearer " <> token), "/api/clients")
 
     assert json_response(conn, 200)
+  end
+
+  test "DELETE it should get error when token has unknown uuid" do
+    conn =
+      delete(
+        build_conn() |> put_req_header("authorization", "Bearer " <> @hack_token),
+        "/api/clients"
+      )
+
+    assert json_response(conn, 404)
+  end
+
+  test "GET it should get error when token has unknown uuid" do
+    conn =
+      get(
+        build_conn() |> put_req_header("authorization", "Bearer " <> @hack_token),
+        "/api/clients"
+      )
+
+    assert json_response(conn, 404)
+  end
+
+  test "PATCH it should get error when token has unknown uuid" do
+    conn =
+      patch(
+        build_conn() |> put_req_header("authorization", "Bearer " <> @hack_token),
+        "/api/clients"
+      )
+
+    assert json_response(conn, 404)
   end
 end
