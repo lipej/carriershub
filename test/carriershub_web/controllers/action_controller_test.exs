@@ -69,6 +69,22 @@ defmodule CarriershubWeb.ActionControllerTest do
            }
   end
 
+  test "it should get errot when client don't have integration" do
+    conn =
+      post(
+        build_conn() |> put_req_header("authorization", "Bearer " <> @token),
+        "/api/action",
+        integration: "any",
+        data: %{codes: ["AE0123456789BR"]},
+        action: "tracking"
+      )
+
+    assert json_response(conn, 400) == %{
+             "message" => "no integration fields for any.",
+             "success" => false
+           }
+  end
+
   test "it should get errot when try to perform a action in not implemented" do
     post(
       build_conn() |> put_req_header("authorization", "Bearer " <> @token),
