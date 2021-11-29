@@ -1,0 +1,374 @@
+{
+	"info": {
+		"_postman_id": "cc9071ea-da63-43f3-b195-357147defdbb",
+		"name": "Carriershub",
+		"description": "This is a postman documentation for carriershub app: [github](https://github.com/lipejose/carriershub-elixir)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "create client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Client Name\",\r\n    \"key\": \"supersecretintegrationkey\", //Integration key, is use to auth, provide a strong key\r\n    \"cnpj\": \"01234567891011\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"clients"
+							]
+						},
+						"description": "To create a client you need, name, cnpj and a strong integration key.\nThe integration key is used to create tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "get client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "SFMyNTY.g2gDdAAAAAJkAAJpZG0AAAAkMjNlNmM4NDItNzM2NC00Y2U2LWFlN2EtYTYwNDU5MzYwNWQ3ZAAEbmFtZW0AAAAFdGVzdGVuBgB_mbBkfQFiAAFRgA.vrWGzfMqt6jcYm9k-ptC3r2u9Y73_IhTTOQcLuMYGlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"clients"
+							]
+						},
+						"description": "Client can get only himself so nothing is need just the token"
+					},
+					"response": []
+				},
+				{
+					"name": "update client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "SFMyNTY.g2gDdAAAAAJkAAJpZG0AAAAkMjNlNmM4NDItNzM2NC00Y2U2LWFlN2EtYTYwNDU5MzYwNWQ3ZAAEbmFtZW0AAAAFdGVzdGVuBgB_mbBkfQFiAAFRgA.vrWGzfMqt6jcYm9k-ptC3r2u9Y73_IhTTOQcLuMYGlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New Fake Company Name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"clients"
+							]
+						},
+						"description": "You can update, name, cnpj and key."
+					},
+					"response": []
+				},
+				{
+					"name": "delete client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "SFMyNTY.g2gDdAAAAAJkAAJpZG0AAAAkMjNlNmM4NDItNzM2NC00Y2U2LWFlN2EtYTYwNDU5MzYwNWQ3ZAAEbmFtZW0AAAAFdGVzdGVuBgB_mbBkfQFiAAFRgA.vrWGzfMqt6jcYm9k-ptC3r2u9Y73_IhTTOQcLuMYGlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"clients"
+							]
+						},
+						"description": "Client need to delete himself, just need to pass the token."
+					},
+					"response": []
+				}
+			],
+			"description": "In this folder you find everything to create clients in app"
+		},
+		{
+			"name": "Integrations",
+			"item": [
+				{
+					"name": "create integration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "SFMyNTY.g2gDdAAAAAJkAAJpZG0AAAAkMjNlNmM4NDItNzM2NC00Y2U2LWFlN2EtYTYwNDU5MzYwNWQ3ZAAEbmFtZW0AAAAFdGVzdGVuBgB_mbBkfQFiAAFRgA.vrWGzfMqt6jcYm9k-ptC3r2u9Y73_IhTTOQcLuMYGlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Correios\",\r\n    \"fields\": {\r\n        \"api_key\": \"apiiiiiikeyyyy\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/integrations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"integrations"
+							]
+						},
+						"description": "Need to pass token\n\nIntegration need a name and integration fields (api keys...)"
+					},
+					"response": []
+				},
+				{
+					"name": "get integration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "SFMyNTY.g2gDdAAAAAJkAAJpZG0AAAAkMjNlNmM4NDItNzM2NC00Y2U2LWFlN2EtYTYwNDU5MzYwNWQ3ZAAEbmFtZW0AAAAFdGVzdGVuBgB_mbBkfQFiAAFRgA.vrWGzfMqt6jcYm9k-ptC3r2u9Y73_IhTTOQcLuMYGlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/integration/f0befc51-0384-4446-baf5-9d7ec9ee8f6b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"integration",
+								"f0befc51-0384-4446-baf5-9d7ec9ee8f6b"
+							]
+						},
+						"description": "Need token and pass integration uuid in url, can only see integrations associated to client id"
+					},
+					"response": []
+				},
+				{
+					"name": "update integration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "SFMyNTY.g2gDdAAAAAJkAAJpZG0AAAAkMjNlNmM4NDItNzM2NC00Y2U2LWFlN2EtYTYwNDU5MzYwNWQ3ZAAEbmFtZW0AAAAFdGVzdGVuBgB_mbBkfQFiAAFRgA.vrWGzfMqt6jcYm9k-ptC3r2u9Y73_IhTTOQcLuMYGlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": {\r\n        \"api_key\": \"newapiiiikeyyy\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/integrations/f0befc51-0384-4446-baf5-9d7ec9ee8f6b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"integrations",
+								"f0befc51-0384-4446-baf5-9d7ec9ee8f6b"
+							]
+						},
+						"description": "Need token and pass integration uuid in url, can edit name and fields."
+					},
+					"response": []
+				},
+				{
+					"name": "delete integration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "SFMyNTY.g2gDdAAAAAJkAAJpZG0AAAAkMjNlNmM4NDItNzM2NC00Y2U2LWFlN2EtYTYwNDU5MzYwNWQ3ZAAEbmFtZW0AAAAFdGVzdGVuBgB_mbBkfQFiAAFRgA.vrWGzfMqt6jcYm9k-ptC3r2u9Y73_IhTTOQcLuMYGlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/integration/f0befc51-0384-4446-baf5-9d7ec9ee8f6b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"integration",
+								"f0befc51-0384-4446-baf5-9d7ec9ee8f6b"
+							]
+						},
+						"description": "Need token and pass integration uuid in url"
+					},
+					"response": []
+				}
+			],
+			"description": "Here you can manager integrations, remember always to create integration plugin before."
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"supersecretintegrationkey\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"auth"
+							]
+						},
+						"description": "Just pass the client integration key."
+					},
+					"response": []
+				}
+			],
+			"description": "Use to generate tokens, in app token is set to last for 1 year, you can set this in auth pipe"
+		},
+		{
+			"name": "actions",
+			"item": [
+				{
+					"name": "performing actions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"integration\": \"correios\", //plugin name\r\n    \"data\": {\r\n        \"codes\": [\r\n            \"KL0123456789BR\",\r\n            \"PL9876543210BR\"\r\n        ] // data to use in the action, example have codes to tracking \r\n    },\r\n    \"action\": \"tracking\" // action to perform \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/integration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"integration"
+							]
+						},
+						"description": "Need to pass shipping company name, action to perform and data to use in action."
+					},
+					"response": []
+				}
+			],
+			"description": "Used to perform actions in plugins"
+		}
+	]
+}
