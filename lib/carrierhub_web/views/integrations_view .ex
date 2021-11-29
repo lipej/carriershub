@@ -1,5 +1,5 @@
-defmodule CarrierhubWeb.IntegrationsView do
-  use CarrierhubWeb, :view
+defmodule CarriershubWeb.IntegrationsView do
+  use CarriershubWeb, :view
 
   def render("index.json", %{integration: integration}) do
     %{

@@ -1,5 +1,5 @@
-defmodule CarrierhubWeb.ActionView do
-  use CarrierhubWeb, :view
+defmodule CarriershubWeb.ActionView do
+  use CarriershubWeb, :view
 
   def render("action.json", %{response: response}) do
     %{

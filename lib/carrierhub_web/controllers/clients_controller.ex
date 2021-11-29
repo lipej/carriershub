@@ -1,19 +1,19 @@
-defmodule CarrierhubWeb.ClientsController do
-  use CarrierhubWeb, :controller
+defmodule CarriershubWeb.ClientsController do
+  use CarriershubWeb, :controller
 
-  alias CarrierhubWeb.FallbackController
+  alias CarriershubWeb.FallbackController
 
   action_fallback FallbackController
 
-  def show(conn, params) do
-    with {:ok, client} <- Carrierhub.get_client(params["id"]) do
+  def show(conn, _params) do
+    with {:ok, client} <- Carriershub.get_client(conn.assigns[:client]) do
       conn
       |> render("index.json", client: client)
     end
   end
 
   def create(conn, params) do
-    with {:ok, client} <- Carrierhub.create_client(params) do
+    with {:ok, client} <- Carriershub.create_client(params) do
       conn
       |> put_status(:created)
       |> render("index.json", client: client)
@@ -21,14 +21,16 @@ defmodule CarrierhubWeb.ClientsController do
   end
 
   def update(conn, params) do
-    with {:ok, client} <- Carrierhub.update_client(params) do
+    client_to_persist = Map.put(params, "id", conn.assigns[:client])
+
+    with {:ok, client} <- Carriershub.update_client(client_to_persist) do
       conn
       |> render("index.json", client: client)
     end
   end
 
-  def delete(conn, params) do
-    with {:ok, client} <- Carrierhub.delete_client(params["id"]) do
+  def delete(conn, _params) do
+    with {:ok, client} <- Carriershub.delete_client(conn.assigns[:client]) do
       conn
       |> render("index.json", client: client)
     end

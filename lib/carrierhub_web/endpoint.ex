@@ -1,12 +1,12 @@
-defmodule CarrierhubWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :carrierhub
+defmodule CarriershubWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :carriershub
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_carrierhub_key",
+    key: "_carriershub_key",
     signing_salt: "mczwWBBF"
   ]
 
@@ -18,7 +18,7 @@ defmodule CarrierhubWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :carrierhub,
+    from: :carriershub,
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
@@ -43,5 +43,5 @@ defmodule CarrierhubWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug CarrierhubWeb.Router
+  plug CarriershubWeb.Router
 end

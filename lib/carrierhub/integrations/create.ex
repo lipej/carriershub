@@ -1,9 +1,8 @@
-defmodule Carrierhub.Integration.Create do
-  alias Carrierhub.{Repo, Integration}
+defmodule Carriershub.Integration.Create do
+  import Carriershub.Integration
 
   def call(params) do
-    case Integration.changeset(%Integration{}, params) |> Repo.insert() do
-      {:error, result} -> {:error, %{result: result, status: :not_found}}
+    case create(params) do
       {:ok, integration} -> {:ok, integration}
     end
   end

@@ -1,4 +1,4 @@
-defmodule CarrierhubWeb.ConnCase do
+defmodule CarriershubWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule CarrierhubWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use CarrierhubWeb.ConnCase, async: true`, although
+  by setting `use CarriershubWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,12 +22,12 @@ defmodule CarrierhubWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import CarrierhubWeb.ConnCase
+      import CarriershubWeb.ConnCase
 
-      alias CarrierhubWeb.Router.Helpers, as: Routes
+      alias CarriershubWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint CarrierhubWeb.Endpoint
+      @endpoint CarriershubWeb.Endpoint
     end
   end
 

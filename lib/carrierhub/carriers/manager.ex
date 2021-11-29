@@ -1,5 +1,5 @@
-defmodule Carrierhub.Carriers.Manager do
-  alias Carrierhub.{Repo, Client}
+defmodule Carriershub.Carriers.Manager do
+  import Carriershub.Integration
 
   def do_action(plugin, action, fields, data) do
     apply(plugin, action, [data, fields])
@@ -8,44 +8,25 @@ defmodule Carrierhub.Carriers.Manager do
   def can_perform_action(plugin, action) do
     action = String.downcase(action)
 
-    if Keyword.has_key?(plugin.__info__(:functions), String.to_atom(action)),
-      do: {:ok, String.to_atom(action)},
-      else: {:error, %{result: "Can't perform action: #{action}", status: :bad_request}}
-  end
-
-  def check_integrations(uuid, carrier) do
-    with client <- find_client(uuid) do
-      extract_fields({:ok, client}, carrier)
+    case Keyword.has_key?(plugin.__info__(:functions), String.to_atom(action)) do
+      true -> {:ok, String.to_atom(action)}
+      false -> {:error, %{result: "can't perform action: #{action}", status: :bad_request}}
     end
   end
 
-  defp find_client(uuid) do
-    with client <- Repo.get(Client, uuid) do
-      case Repo.preload(client, :integrations) do
-        nil -> {:error, %{result: "client not found with UUID #{uuid}", status: :bad_request}}
-        client -> client
-      end
-    end
-  end
+  @spec get_fields(any, binary) ::
+          {:error, %{result: <<_::64, _::_*8>>, status: :bad_request}} | {:ok, any}
+  def get_fields(uuid, integration) do
+    case get_integration_by_client(uuid, String.capitalize(integration)) do
+      nil ->
+        {:error,
+         %{
+           result: "no integration fields for #{integration}.",
+           status: :bad_request
+         }}
 
-  defp extract_fields({:ok, client}, carrier) do
-    carrier = String.capitalize(String.downcase(carrier))
-
-    case client do
       client ->
-        case Enum.filter(client.integrations, fn
-               %{name: ^carrier} -> true
-               _ -> false
-             end) do
-          element ->
-            case List.first(element) do
-              nil ->
-                {:error, %{result: "integration not found for #{carrier}", status: :bad_request}}
-
-              integration ->
-                {:ok, integration.fields}
-            end
-        end
+        {:ok, client.fields}
     end
   end
 end

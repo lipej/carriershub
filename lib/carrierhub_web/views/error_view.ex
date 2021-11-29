@@ -1,5 +1,5 @@
-defmodule CarrierhubWeb.ErrorView do
-  use CarrierhubWeb, :view
+defmodule CarriershubWeb.ErrorView do
+  use CarriershubWeb, :view
 
   alias Ecto.Changeset
 

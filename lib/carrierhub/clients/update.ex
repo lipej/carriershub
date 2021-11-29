@@ -1,19 +1,14 @@
-defmodule Carrierhub.Client.Update do
-  alias Carrierhub.{Repo, Client}
+defmodule Carriershub.Client.Update do
+  import Carriershub.Client
 
   def call(params) do
-    case Repo.get(Client, params["id"]) do
-      nil ->
-        {:error, %{result: "Client not found", status: :not_found}}
-
-      client ->
-        case Client.changeset(client, params) |> Repo.update() do
-          {:ok, client} ->
-            {:ok, Repo.preload(client, :integrations)}
-
-          {:error, error} ->
-            {:error, %{result: error, status: :not_found}}
-        end
+    if client = get(params["id"]) do
+      case update(client, params) do
+        {:ok, client} ->
+          {:ok, preload(client)}
+      end
+    else
+      {:error, %{result: "client not found", status: :not_found}}
     end
   end
 end

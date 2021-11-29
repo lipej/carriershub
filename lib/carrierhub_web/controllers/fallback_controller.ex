@@ -1,7 +1,7 @@
-defmodule CarrierhubWeb.FallbackController do
-  use CarrierhubWeb, :controller
+defmodule CarriershubWeb.FallbackController do
+  use CarriershubWeb, :controller
 
-  alias CarrierhubWeb.ErrorView
+  alias CarriershubWeb.ErrorView
 
   def call(conn, {:error, %{result: result, status: status}}) do
     conn

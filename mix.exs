@@ -1,16 +1,25 @@
-defmodule Carrierhub.MixProject do
+defmodule Carriershub.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :carrierhub,
+      app: :carriershub,
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        "test.cov": :test,
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.github ": :test
+      ]
     ]
   end
 
@@ -19,7 +28,7 @@ defmodule Carrierhub.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Carrierhub.Application, []},
+      mod: {Carriershub.Application, []},
       extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
@@ -43,7 +52,8 @@ defmodule Carrierhub.MixProject do
       {:ecto_sql, "~> 3.7.1"},
       {:postgrex, ">= 0.0.0"},
       {:poison, "~> 5.0"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
@@ -55,7 +65,14 @@ defmodule Carrierhub.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get"]
+      setup: ["deps.get"],
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      "test.cov": [
+        "test --cover --export-coverage default",
+        "test.coverage"
+      ]
     ]
   end
 end

@@ -1,4 +1,4 @@
-defmodule Carrierhub.Repo.Migrations.CreateClients do
+defmodule Carriershub.Repo.Migrations.CreateClients do
   use Ecto.Migration
 
   def change do
