@@ -8,7 +8,7 @@
 
 ---
 
-Carriershub is a project written in elixir with the main objective learn about elixir, the application is based on a plugin management architecture, to make easy the implementation of any new carriers. It's incredibly simple because code never needs to know anything about the shipping company, everything you need to do is create a new file in plugins dir with all functions you need from the shipping company and set up the integrations keys in the client account.
+Carriershub is a project written in elixir with the main objective learn about elixir, the application is based on a plugin architecture, to make easy the implementation of any new carriers. It's incredibly simple because code never needs to know anything about the shipping company, everything you need to do is create a new file in plugins dir with all functions you need from the shipping company and set up the integrations keys in the client account.
 
 ### How to use
 
