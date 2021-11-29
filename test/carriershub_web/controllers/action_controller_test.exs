@@ -47,6 +47,13 @@ defmodule CarriershubWeb.ActionControllerTest do
   end
 
   test "it should get errot when try to perform a action in plugin not implemented" do
+    post(
+      build_conn() |> put_req_header("authorization", "Bearer " <> @token),
+      "/api/integrations",
+      name: "Correios",
+      fields: %{key: "93018912nrlknfi1c"}
+    )
+
     conn =
       post(
         build_conn() |> put_req_header("authorization", "Bearer " <> @token),
@@ -63,13 +70,6 @@ defmodule CarriershubWeb.ActionControllerTest do
   end
 
   test "it should get errot when try to perform a action in not implemented" do
-    post(
-      build_conn() |> put_req_header("authorization", "Bearer " <> @token),
-      "/api/integrations",
-      name: "correios",
-      fields: %{key: "93018912nrlknfi1c"}
-    )
-
     post(
       build_conn() |> put_req_header("authorization", "Bearer " <> @token),
       "/api/integrations",
