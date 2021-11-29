@@ -66,6 +66,13 @@ defmodule CarriershubWeb.ActionControllerTest do
     post(
       build_conn() |> put_req_header("authorization", "Bearer " <> @token),
       "/api/integrations",
+      name: "correios",
+      fields: %{key: "93018912nrlknfi1c"}
+    )
+
+    post(
+      build_conn() |> put_req_header("authorization", "Bearer " <> @token),
+      "/api/integrations",
       name: "Test",
       fields: %{key: "93018912nrlknfi1c"}
     )
